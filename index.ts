@@ -13,14 +13,20 @@ const getReleaseCommits = async (
 ): Promise<Commit[]> => {
   const command = `git log --grep="${pattern}" --all --full-history --pretty=format:"%ad,%H,%ae,%s"`;
   const logResult = await execAsync(command, { cwd: baseDir });
-  return logResult.stdout.split("\n").map((result) => {
-    const data = result.split(",");
+  return logResult.stdout.split("\n").map((message) => {
+    const data = message.split(",");
+    const version = data[3].match(/\d+\.\d+\.\d+/);
+    if (!version) {
+      throw new Error(
+        `Could not find version in Release commit message: "${message}"`
+      );
+    }
     return {
       date: data[0],
       hash: data[1],
       author: data[2],
       subject: data[3],
-      version: data[3].match(/\d\.\d\.\d/)?.toString() ?? "",
+      version: version.toString(),
     } as Commit;
   });
 };
