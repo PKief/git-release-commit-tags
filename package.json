@@ -1,19 +1,24 @@
 {
   "name": "git-release-commit-tags",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Tool to add a release tag to all release commits",
+  "main": "index.ts",
   "scripts": {
-    "start": "ts-node index.ts C:/Projects/vscode-material-icon-theme"
+    "start": "node --loader ts-node/esm index.ts"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Philipp Kief",
+  "license": "MIT",
+  "type": "module",
   "devDependencies": {
+    "@types/minimist": "^1.2.2",
+    "@types/parse-github-url": "^1.0.0",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.5"
   },
   "dependencies": {
-    "simple-git": "^3.0.3"
+    "axios": "^0.25.0",
+    "minimist": "^1.2.5",
+    "parse-github-url": "^1.0.2"
   }
 }
