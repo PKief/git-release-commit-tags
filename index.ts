@@ -42,6 +42,7 @@ const tagCommit = async (commit: Commit, baseDir: string) => {
 };
 
 const createRelease = async (
+  appName: string,
   commit: Commit,
   repository: string,
   token: string
@@ -55,8 +56,8 @@ const createRelease = async (
     {
       tag_name: `v${commit.version}`,
       target_commitish: commit.hash,
-      name: `Markdown Checkbox v${commit.version}`,
-      body: `Find Changelog here: ${repository}/blob/main/CHANGELOG.md`,
+      name: `${appName} v${commit.version}`,
+      generate_release_notes: true,
     },
     {
       headers: {
@@ -73,6 +74,7 @@ const main = async () => {
     pattern: string;
     repository: string;
     createReleases: string;
+    appName: string;
     token: string;
   }>(process.argv.slice(2));
 
@@ -81,7 +83,7 @@ const main = async () => {
   for (const commit of commits) {
     await tagCommit(commit, args.baseDir);
     if (!!args.createReleases) {
-      await createRelease(commit, args.repository, args.token);
+      await createRelease(args.appName, commit, args.repository, args.token);
     }
   }
 };

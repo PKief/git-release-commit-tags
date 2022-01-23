@@ -15,7 +15,7 @@ npm install
 The tool can be executed like this:
 
 ```
-npm start -- --baseDir=<PROJECT_DIR> --pattern=<COMMIT_MESSAGE_REGEX> --repository=<GITHUB_REPO_URL> --createReleases=true|false --token=<GITHUB_TOKEN>
+npm start -- --baseDir=<PROJECT_DIR> --pattern=<COMMIT_MESSAGE_REGEX> --repository=<GITHUB_REPO_URL> --createReleases=true|false --appName=<APP_NAME> --token=<GITHUB_TOKEN>
 ```
 
 #### Command description
@@ -26,5 +26,6 @@ npm start -- --baseDir=<PROJECT_DIR> --pattern=<COMMIT_MESSAGE_REGEX> --reposito
 | `--pattern`        | Regex-Pattern to find release commits                                          |
 | `--repository`     | Path to the GitHub repository                                                  |
 | `--createReleases` | Wether it should create releases for each tag in the GitHub repository         |
+| `--appName`        | Name of the app for the release subject                                        |
 | `--token`          | Only needed if `--createReleases` is set to true. Token with repository access |
 |                    |                                                                                |
